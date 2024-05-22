@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "808429692116",
+    "project_id": "homework-firebase-auth-87652",
+    "storage_bucket": "homework-firebase-auth-87652.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808429692116:android:ad16876db40f24824b8741",
+        "android_client_info": {
+          "package_name": "com.pdp.homework_firebase_auth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApzOMx_Z35QnPE3ZXmM_bypv6u3hf8Caw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
