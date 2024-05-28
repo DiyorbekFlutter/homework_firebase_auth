@@ -21,7 +21,6 @@ class App extends StatelessWidget {
   }
 }
 
-
 class AuthChecker extends StatelessWidget {
   const AuthChecker({super.key});
 
@@ -30,15 +29,8 @@ class AuthChecker extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting){
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.blue,
-              strokeCap: StrokeCap.round
-            )
-          );
-        } else if(snapshot.hasData){
-          return const HomePage();
+        if(snapshot.hasData){
+          return HomePage(user: snapshot.data as User);
         } else {
           return const Onboarding();
         }

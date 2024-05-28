@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:homework_firebase_auth/auth_sevice.dart';
+import 'package:homework_firebase_auth/network_service.dart';
 import 'package:homework_firebase_auth/pages/home_page.dart';
 
 import '../../loading.dart';
@@ -108,7 +109,13 @@ class _CreateAccountState extends State<CreateAccount> {
                 User? user = await AuthService.createAccount(fullName: "Diyorbek/Qurbonov", email: email.text.trim(), password: password.text.trim());
                 navigatorPop;
                 setState(() => inProgress = false);
-                if(user != null) pushAndRemoveUntil;
+                if(user != null) {
+                  await ClientService.post({
+                    "email": user.email,
+                    "uid": user.uid
+                  });
+                  pushAndRemoveUntil(user);
+                }
               }
             },
             style: ElevatedButton.styleFrom(
@@ -124,7 +131,7 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   Future<void> get navigatorPop async => Navigator.pop(context);
-  Future<void> get pushAndRemoveUntil async => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const HomePage()), (route) => false);
+  Future<void> pushAndRemoveUntil(user) async => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage(user: user)), (route) => false);
 
   bool get checkData {
     bool check = true;

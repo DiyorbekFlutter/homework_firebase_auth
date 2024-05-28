@@ -124,7 +124,7 @@ class _LoginState extends State<Login> {
                 User? user = await AuthService.login(email.text.trim(), password.text.trim());
                 navigatorPop;
                 setState(() => inProgress = false);
-                if(user != null) pushAndRemoveUntil;
+                if(user != null) pushAndRemoveUntil(user);
               }
             },
             style: ElevatedButton.styleFrom(
@@ -148,7 +148,7 @@ class _LoginState extends State<Login> {
 
 
   Future<void> get navigatorPop async => Navigator.pop(context);
-  Future<void> get pushAndRemoveUntil async => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const HomePage()), (route) => false);
+  Future<void> pushAndRemoveUntil(User user) async => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage(user: user)), (route) => false);
 
   void showText(String text){
     ScaffoldMessenger.of(context).showSnackBar(
